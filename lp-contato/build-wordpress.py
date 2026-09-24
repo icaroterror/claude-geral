@@ -107,6 +107,26 @@ def scope_block(block):
 
 css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
 css = scope_block(css)
+
+# Tema do site usa html{font-size:62.5%}: rem vira px fixo (base 16px).
+def rem_to_px(m):
+    v = float(m.group(1)) * 16
+    return ('%g' % round(v, 2)) + 'px'
+css = re.sub(r'(?<![\w.-])(\d*\.?\d+)rem\b', rem_to_px, css)
+
+# Fontes com nomes exclusivos (tema/plugins não conseguem trocar nem bloquear).
+FS = 'https://cdn.jsdelivr.net/npm/@fontsource'
+FACES = [('CCM Playfair', 'playfair-display', 700, 'normal'), ('CCM Playfair', 'playfair-display', 800, 'normal'),
+         ('CCM Playfair', 'playfair-display', 700, 'italic'), ('CCM Inter', 'inter', 400, 'normal'),
+         ('CCM Inter', 'inter', 500, 'normal'), ('CCM Inter', 'inter', 600, 'normal'), ('CCM Inter', 'inter', 700, 'normal')]
+font_faces = ''.join(
+    "@font-face{font-family:'%s';font-style:%s;font-weight:%d;font-display:swap;"
+    "src:url(%s/%s@5/files/%s-latin-%d-%s.woff2) format('woff2')}\n" % (fam, st, w, FS, pkg, pkg, w, st)
+    for fam, pkg, w, st in FACES)
+css = font_faces + css
+css = css.replace("--serif:'Playfair Display',Georgia,serif", "--serif:'CCM Playfair','Playfair Display',Georgia,serif")
+css = css.replace("--sans:'Inter',", "--sans:'CCM Inter','Inter',")
+assert "'CCM Playfair','Playfair" in css and "'CCM Inter','Inter'" in css
 css += ('\n/* Elementor: ocupa a largura toda e neutraliza estilos do tema */\n'
         'body{overflow-x:hidden}\n'
         + ROOT + '{position:relative;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);text-align:left}\n'
@@ -130,12 +150,9 @@ def img(m):
     return 'src="' + cache[n] + '"'
 body = re.sub(r'src="img/([\w.-]+)"', img, body)
 
-fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
-         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700'
-         '&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">')
+fonts = ''
 out = ('<!-- LP Contato CC&M: colar no widget HTML do Elementor (página com layout Elementor Canvas) -->\n'
-       + fonts + '\n<style>\n' + css + '\n</style>\n' + ld + '\n<div id="ccm-lp">\n' + body.strip()
+       + '<style>\n' + css + '\n</style>\n' + ld + '\n<div id="ccm-lp">\n' + body.strip()
        + '\n</div>\n' + js + '\n')
 dest = 'wordpress-colar-leve.html' if CDN else 'wordpress-colar.html'
 open(dest, 'w', encoding='utf8').write(out)
