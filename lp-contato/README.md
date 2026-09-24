@@ -6,10 +6,13 @@ Landing page estática (HTML + CSS + JS puro, sem dependências) para receber o 
 - `index.html`: página completa (CSS e JS embutidos, carregamento rápido)
 - `img/`: foto da Dra. Fernanda, fotos do escritório e logo (extraídas das páginas atuais do site)
 
-## Como publicar no WordPress
-1. Abra a página (ex.: `/contato-site`) e defina o template sem cabeçalho/rodapé do tema (Elementor Canvas / "Página em branco").
-2. Adicione um widget **HTML** (Elementor) ou bloco **HTML personalizado** (Gutenberg).
-3. Cole todo o conteúdo de `wordpress-colar.html` (imagens já embutidas, ~485 KB). O GTM do site continua valendo, não precisa colar de novo.
+## Como publicar no Elementor
+1. Edite a página (ex.: `/contato-site`) com o Elementor. Em **Configurações da página → Layout**, escolha **Elementor Canvas** (sem cabeçalho/rodapé do tema).
+2. Apague o conteúdo antigo e adicione um container com **Largura: largura total** e **Preenchimento (padding): 0**.
+3. Arraste um widget **HTML** e cole todo o conteúdo de `wordpress-colar.html` (imagens embutidas, ~490 KB).
+4. Atualize/publique e limpe o cache (WP Rocket, LiteSpeed etc.), se houver.
+
+O código já se protege do tema: todo o CSS fica dentro de `#ccm-lp` com classes prefixadas `ccm-`, a página ocupa 100% da largura mesmo dentro de container "boxed", e os links do WhatsApp já estão no HTML (funcionam mesmo se um plugin atrasar o JavaScript). O GTM do site continua valendo, não precisa colar de novo.
 
 Se editar `index.html`, rode `python3 build-wordpress.py` (requer Pillow) para gerar o arquivo de colar de novo.
 
