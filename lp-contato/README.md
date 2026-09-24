@@ -6,8 +6,12 @@ Landing page estática (HTML + CSS + JS puro, sem dependências) para receber o 
 - `index.html`: página completa (CSS e JS embutidos, carregamento rápido)
 - `img/`: foto da Dra. Fernanda, fotos do escritório e logo (extraídas das páginas atuais do site)
 
-## Como publicar
-Suba a pasta inteira no servidor (ex.: `carvalhocamposadvocacia.com.br/lp/`) ou cole o HTML num bloco "HTML personalizado" / template em branco do WordPress, ajustando o caminho das imagens para a Biblioteca de Mídia.
+## Como publicar no WordPress
+1. Abra a página (ex.: `/contato-site`) e defina o template sem cabeçalho/rodapé do tema (Elementor Canvas / "Página em branco").
+2. Adicione um widget **HTML** (Elementor) ou bloco **HTML personalizado** (Gutenberg).
+3. Cole todo o conteúdo de `wordpress-colar.html` (imagens já embutidas, ~485 KB). O GTM do site continua valendo, não precisa colar de novo.
+
+Se editar `index.html`, rode `python3 build-wordpress.py` (requer Pillow) para gerar o arquivo de colar de novo.
 
 ## Headline dinâmica (correspondência com o anúncio)
 Adicione `?area=<chave>` na URL final do anúncio. A headline e a mensagem do WhatsApp mudam para a área:
