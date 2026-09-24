@@ -14,6 +14,8 @@ Landing page estática (HTML + CSS + JS puro, sem dependências) para receber o 
 
 O código já se protege do tema: todo o CSS fica dentro de `#ccm-lp` com classes prefixadas `ccm-`, a página ocupa 100% da largura mesmo dentro de container "boxed", e os links do WhatsApp já estão no HTML (funcionam mesmo se um plugin atrasar o JavaScript). O GTM do site continua valendo, não precisa colar de novo.
 
+**Versão leve (`wordpress-colar-leve.html`, ~40 KB):** mesmo código, mas as imagens vêm de `img-web/` via jsDelivr (repositório público, URL fixada no commit). Mais fácil de copiar e carrega mais rápido. Gere com `python3 build-wordpress.py <URL_BASE>`.
+
 Se editar `index.html`, rode `python3 build-wordpress.py` (requer Pillow) para gerar o arquivo de colar de novo.
 
 ## Headline dinâmica (correspondência com o anúncio)
