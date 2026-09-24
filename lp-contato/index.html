@@ -474,7 +474,7 @@ footer p{margin:4px 0}
   };
 
   var params = new URLSearchParams(location.search);
-  var key = (params.get('area') || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z]/g,'');
+  var key = (params.get('area') || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z]/g,'');
   var ctx = AREAS[key];
   if (ctx) document.getElementById('h1').innerHTML = ctx.h1; // conteúdo fixo, não vem da URL
 
