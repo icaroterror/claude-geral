@@ -105,6 +105,7 @@ def scope_block(block):
         i = k
     return '\n'.join(res)
 
+css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
 css = scope_block(css)
 css += ('\n/* Elementor: ocupa a largura toda e neutraliza estilos do tema */\n'
         'body{overflow-x:hidden}\n'
