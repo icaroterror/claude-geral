@@ -223,6 +223,26 @@ footer p{margin:4px 0}
   .name-card{left:50%;transform:translateX(-50%);bottom:24px;width:max-content;max-width:92%;text-align:center}
   .steps{grid-template-columns:1fr}
   .grid-areas{grid-template-columns:1fr}
+  /* cards de áreas compactos: ícone ao lado do título */
+  .areas-head{margin-bottom:24px}
+  .grid-areas{gap:12px}
+  .area{display:grid;grid-template-columns:44px 1fr;column-gap:14px;align-items:start;padding:18px 16px}
+  .area > *{grid-column:2}
+  .area .ico{grid-column:1;grid-row:1 / span 4;width:44px;height:44px;margin:0}
+  .area .ico svg{width:22px;height:22px}
+  .area h3{font-size:1.08rem;margin:2px 0 4px}
+  .area p{font-size:.88rem;line-height:1.5}
+  .area .go{margin-top:8px;font-size:.88rem}
+  .tag24{position:static;justify-self:start;margin-bottom:6px}
+  .other-areas{margin-top:20px}
+  /* "Como funciona" compacto */
+  .steps{gap:12px;margin-top:24px}
+  .step{display:grid;grid-template-columns:44px 1fr;column-gap:14px;padding:18px 16px}
+  .step .ico{grid-row:1 / span 2;width:44px;height:44px;margin:0}
+  .step h3{font-size:1.08rem;margin:2px 0 4px;padding-right:34px}
+  .step p{font-size:.9rem;line-height:1.5}
+  .step::before{font-size:1.6rem;top:14px;right:16px}
+  .center-cta{margin-top:28px}
   .trust li{justify-content:flex-start;padding:14px 4px;font-size:.84rem}
   .wa-float{display:none}
   .wa-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(11,29,46,.96);backdrop-filter:blur(6px);border-top:1px solid rgba(196,149,42,.35);transform:translateY(110%);transition:transform .25s}
