@@ -53,7 +53,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--sans);font-size:16px;color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
@@ -66,7 +66,7 @@ h2 em{font-style:italic;color:var(--gold)}
 section{padding:80px 0}
 
 /* Botões */
-.btn-wa{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:var(--wa);color:#fff;text-decoration:none;font-weight:700;font-size:1.08rem;padding:18px 30px;border-radius:999px;box-shadow:0 10px 28px rgba(37,211,102,.35);transition:transform .15s,background .15s,box-shadow .15s;min-height:56px}
+.btn-wa{display:inline-flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;gap:12px;background:var(--wa);color:#fff;text-decoration:none;font-weight:700;font-size:1.08rem;padding:18px 30px;border-radius:999px;box-shadow:0 10px 28px rgba(37,211,102,.35);transition:transform .15s,background .15s,box-shadow .15s;min-height:56px}
 .btn-wa:hover{background:#1EBE5A;transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,211,102,.45)}
 .btn-wa svg{width:26px;height:26px;flex:none}
 .btn-wa.pulse{animation:pulse 2.4s infinite}
@@ -104,7 +104,6 @@ section{padding:80px 0}
 .hero-photo img{position:relative;width:100%;aspect-ratio:767/1000;object-fit:cover;object-position:top center;border-radius:220px 220px 0 0;-webkit-mask-image:linear-gradient(#000 86%,transparent);mask-image:linear-gradient(#000 86%,transparent)}
 .name-card{position:absolute;left:-30px;bottom:48px;background:rgba(11,29,46,.92);backdrop-filter:blur(6px);border:1px solid rgba(196,149,42,.45);border-left:3px solid var(--gold);padding:14px 18px;border-radius:10px;max-width:290px}
 .name-card strong{display:block;font-family:var(--serif);font-size:1.08rem;color:#fff;line-height:1.25}
-.mob-fer{display:none}
 .name-card span{display:block;font-size:.76rem;color:var(--gold-light);letter-spacing:.06em;text-transform:uppercase;margin-top:4px;font-weight:600}
 
 /* Faixa de confiança */
@@ -212,15 +211,14 @@ footer p{margin:4px 0}
   .badge{margin-bottom:16px}
   .hero h1{margin-bottom:14px}
   .hero .sub{margin-bottom:22px}
-  .hero-cta .btn-wa{width:100%}
+  .btn-wa{font-size:1rem;padding:16px 20px;gap:10px}
+  .hide-sm{display:none}
+  .founder-img::before{display:none}
+  .hero-cta .btn-wa,.founder .btn-wa,.center-cta .btn-wa{width:100%}
   .hero-cta .btn-ghost{margin:0 auto}
   .micro{justify-content:center}
   .hero-photo{max-width:340px}
   .badge{display:none}
-  .mob-fer{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-  .mob-fer img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:2px solid var(--gold)}
-  .mob-fer strong{display:block;font-size:.92rem;color:#fff;line-height:1.25}
-  .mob-fer span{font-size:.72rem;color:var(--gold-light);letter-spacing:.06em;text-transform:uppercase;font-weight:600}
   .hero .sub .xtra{display:none}
   .name-card{left:50%;transform:translateX(-50%);bottom:24px;width:max-content;max-width:92%;text-align:center}
   .steps{grid-template-columns:1fr}
@@ -256,11 +254,10 @@ footer p{margin:4px 0}
   <div class="wrap">
     <div class="hero-copy">
       <span class="badge"><span class="dot"></span>Atendimento pelo WhatsApp · Juiz de Fora/MG</span>
-      <div class="mob-fer"><img src="img/fernanda.jpg" alt="" width="58" height="58"><div><strong>Dra. Fernanda Carvalho Campos e Macedo</strong><span>Fundadora · Juiz de Fora/MG</span></div></div>
       <h1 id="h1" data-default="Precisa de um advogado em Juiz de Fora? <em>Fale agora</em> com a nossa equipe.">Precisa de um advogado em Juiz de Fora? <em>Fale agora</em> com a nossa equipe.</h1>
       <p class="sub" id="sub">Escritório presidido pela <strong>Dra. Fernanda Carvalho Campos e Macedo</strong>, com advogados especialistas em Previdenciário, Trabalhista, Família, Criminal, Servidor Público e mais. <span class="xtra">Conte seu caso e receba uma orientação inicial.</span></p>
       <div class="hero-cta">
-        <a class="btn-wa pulse js-wa" href="https://api.whatsapp.com/send?phone=5532988404083&amp;text=Ol%C3%A1%21%20Achei%20voc%C3%AAs%20no%20Google%20e%20gostaria%20de%20um%20atendimento." target="_blank" rel="noopener" data-local="hero"><svg><use href="#i-wa"/></svg>Falar com um advogado no WhatsApp</a>
+        <a class="btn-wa pulse js-wa" href="https://api.whatsapp.com/send?phone=5532988404083&amp;text=Ol%C3%A1%21%20Achei%20voc%C3%AAs%20no%20Google%20e%20gostaria%20de%20um%20atendimento." target="_blank" rel="noopener" data-local="hero"><svg><use href="#i-wa"/></svg><span>Falar com um advogado<span class="hide-sm"> no WhatsApp</span></span></a>
         <a class="btn-ghost" href="#areas">Ver áreas de atuação <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="micro">

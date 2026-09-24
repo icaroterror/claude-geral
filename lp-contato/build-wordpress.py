@@ -133,7 +133,8 @@ css += ('\n/* Elementor: ocupa a largura toda e neutraliza estilos do tema */\n'
         + ROOT + ' a,' + ROOT + ' a:hover,' + ROOT + ' a:focus{text-decoration:none;box-shadow:none}\n'
         + ROOT + ' h1,' + ROOT + ' h2,' + ROOT + ' h3{letter-spacing:normal;text-transform:none}\n'
         + ROOT + ' .' + P + 'faq-list summary{background:none;border:0}\n'
-        + ROOT + ' img{border:0;box-shadow:none}\n')
+        + ROOT + ' img{border:0;box-shadow:none}\n'
+        '.ht-ctc,.ht-ctc-chat,.ht_ctc_chat_greetings_box{display:none!important}\n')
 
 # ---- JS ----
 for old, new in [("'.js-wa'", "'.%sjs-wa'" % P), ("'.js-tel'", "'.%sjs-tel'" % P),
