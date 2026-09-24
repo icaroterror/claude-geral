@@ -7,7 +7,7 @@ do Elementor (ou bloco "HTML personalizado").
 - a LP "vaza" o container do Elementor e ocupa 100% da largura da tela;
 - sem GTM (o site já carrega).
 """
-import base64, io, re
+import base64, io, os, re, sys
 from PIL import Image
 
 P = 'ccm-'
@@ -17,7 +17,7 @@ SIZES = {'fernanda.jpg': 720, 'equipe.jpg': 900, 'recepcao.jpg': 1000, 'estacoes
          'estacao-trabalho.jpg': 600, 'logo.png': 420}
 
 
-def data_uri(name):
+def optimized(name):
     im = Image.open('img/' + name)
     w = SIZES[name]
     if im.width > w:
@@ -27,7 +27,23 @@ def data_uri(name):
         im.save(buf, 'WEBP', lossless=True)
     else:
         im.convert('RGB').save(buf, 'WEBP', quality=72, method=6)
-    return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
+    return buf.getvalue()
+
+
+# Uso: python3 build-wordpress.py [URL_BASE_DAS_IMAGENS]
+# Sem argumento: imagens embutidas (wordpress-colar.html).
+# Com URL: imagens externas em <URL>/<nome>.webp (wordpress-colar-leve.html) e
+# os .webp são gravados em img-web/ para hospedar.
+CDN = sys.argv[1].rstrip('/') if len(sys.argv) > 1 else None
+
+def data_uri(name):
+    data = optimized(name)
+    if not CDN:
+        return 'data:image/webp;base64,' + base64.b64encode(data).decode()
+    web = os.path.splitext(name)[0] + '.webp'
+    os.makedirs('img-web', exist_ok=True)
+    open('img-web/' + web, 'wb').write(data)
+    return CDN + '/' + web
 
 
 src = open('index.html', encoding='utf8').read()
@@ -120,5 +136,6 @@ fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 out = ('<!-- LP Contato CC&M: colar no widget HTML do Elementor (página com layout Elementor Canvas) -->\n'
        + fonts + '\n<style>\n' + css + '\n</style>\n' + ld + '\n<div id="ccm-lp">\n' + body.strip()
        + '\n</div>\n' + js + '\n')
-open('wordpress-colar.html', 'w', encoding='utf8').write(out)
-print(f'wordpress-colar.html: {len(out)/1024:.0f} KB')
+dest = 'wordpress-colar-leve.html' if CDN else 'wordpress-colar.html'
+open(dest, 'w', encoding='utf8').write(out)
+print(f'{dest}: {len(out)/1024:.0f} KB')
